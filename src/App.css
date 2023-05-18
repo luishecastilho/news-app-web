@@ -3,11 +3,3 @@
     padding:0;
     box-sizing: border-box;
 }
-#header{
-    background-color: blue;
-    padding: .5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
