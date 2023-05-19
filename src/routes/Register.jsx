@@ -2,11 +2,20 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Register.css';
 
+import SetCookie from '../hooks/SetCookie';
+import GetCookie from '../hooks/GetCookie';
+
 function Register() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if(GetCookie('auth_token')){
+        window.location.href = "/";
+    }
+  }, []);
 
   function submitForm(e) {
     e.preventDefault();
@@ -14,9 +23,16 @@ function Register() {
         "name": name,
         "email": email,
         "password": password
-    }).then(function(response) {
-        console.log(response.data);
-    });
+    }, {
+        headers: {
+                    'Accept': `application/json`
+                }
+    }).then((res) => {
+        SetCookie("auth_token", res.data.data.token);
+    })
+    .catch((error) => {
+      console.error(error)
+    })
   }
 
   return (

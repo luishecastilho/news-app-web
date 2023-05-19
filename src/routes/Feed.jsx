@@ -1,18 +1,30 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Feed.css';
+
+import GetCookie from '../hooks/GetCookie';
 
 import FeedArticle from "../components/FeedArticle";
 
 function Feed() {
 
     const [articles, setArticles] = useState([]);
+    const [pagination, setPagination] = useState([]);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/feed')
-        .then(function(response) {
-            setArticles(response.data.data);
-        });
+        axios.get('http://127.0.0.1:8000/api/feed', {
+            headers: { 
+                        'Authorization': `Bearer ${GetCookie('auth_token')}`,
+                        'Accept': 'application/json'
+                    }
+        })
+        .then((res) => {
+            setPagination(res.data.data.articles);
+            setArticles(res.data.data.articles.data);
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }, []);
 
   return (
@@ -20,7 +32,7 @@ function Feed() {
     {
         articles.map(function(article) {
             return (
-                <FeedArticle article={article} />
+                <FeedArticle article={article} key={article.id} />
             )
         })
     }
