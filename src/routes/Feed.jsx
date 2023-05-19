@@ -8,11 +8,41 @@ import "./Feed.css";
 import Spinner from "../components/Spinner/Spinner";
 import "../components/FilterBar.css";
 import PropTypes from "prop-types";
-import Nullimage from "../components/Images/nullimage.png";
 import { Row, Col } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import LoadingBar from "react-top-loading-bar";
 import Pagination from 'react-bootstrap/Pagination';
+
+function nullImage(category) {
+    switch (category) {
+        case "berlin":
+            return "/src/assets/berlin.jpg";
+        break;
+        case "bitcoin":
+            return "/src/assets/bitcoin.jpg";
+        break;
+        case "brazil":
+            return "/src/assets/brazil.jpeg";
+        break;
+        case "cars":
+            return "/src/assets/cars.jpg";
+        break;
+        case "covid":
+            return "/src/assets/covid.jpeg";
+        break;
+        case "election":
+            return "/src/assets/election.png";
+        break;
+        case "nba":
+            return "/src/assets/nba.jpg";
+        break;
+        case "soccer":
+            return "/src/assets/soccer.jpg";
+        break;
+        default:
+            return "/src/assets/nulllimage.png";            
+    }
+}
 
 function Feed() {
     const [articles, setArticles] = useState([]);
@@ -190,7 +220,7 @@ function Feed() {
                     banner={
                       element.banner === null || 
                       element.banner === ""
-                        ? Nullimage
+                        ? nullImage(element.category)
                         : element.banner
                     }
                     description={element.description}

@@ -1,6 +1,38 @@
 import { useEffect, useState } from 'react';
 import moment from "moment";
 import { useParams } from "react-router-dom";
+
+function nullImage(category) {
+    switch (category) {
+        case "berlin":
+            return "/src/assets/berlin.jpg";
+        break;
+        case "bitcoin":
+            return "/src/assets/bitcoin.jpg";
+        break;
+        case "brazil":
+            return "/src/assets/brazil.jpeg";
+        break;
+        case "cars":
+            return "/src/assets/cars.jpg";
+        break;
+        case "covid":
+            return "/src/assets/covid.jpeg";
+        break;
+        case "election":
+            return "/src/assets/election.png";
+        break;
+        case "nba":
+            return "/src/assets/nba.jpg";
+        break;
+        case "soccer":
+            return "/src/assets/soccer.jpg";
+        break;
+        default:
+            return "/src/assets/nulllimage.png";            
+    }
+}
+
 import axios from 'axios';
 import './Article.css';
 
@@ -31,7 +63,7 @@ function Article() {
         </h1>
         <div className="container">
             <img src={article.banner === null || article.banner === ""
-                        ? Nullimage
+                        ? nullImage(article.category)
                         : article.banner} alt="Banner" className="articleImage" />
             <div>
                 <span className="articleSmallText">Category: <span className="articleSmallTextBold">{article.category}</span> - </span>
