@@ -12,11 +12,11 @@ import Nullimage from "../components/Images/nullimage.png";
 import { Row, Col } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import LoadingBar from "react-top-loading-bar";
+import Pagination from 'react-bootstrap/Pagination';
 
 function Feed() {
     const [articles, setArticles] = useState([]);
-    const [pagination, setPagination] = useState([]);
-    const [page, setPage] = useState(1);
+    const [pages, setPages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0);
 
@@ -32,7 +32,8 @@ function Feed() {
 
     document.title = "Feed - News App";
 
-    useEffect(() => {
+
+    function renderPage(url = null) {
         var urlArticles= "";
         var urlFilterData= "";
         var headers = {};
@@ -53,13 +54,22 @@ function Feed() {
 
         // get Feed
         setProgress(15);
+        if (url !== null){
+            urlArticles = url
+        }
         axios.get(urlArticles, {
             headers: headers
         })
         .then((res) => {
             setLoading(true);
             setProgress(70);
-            setPagination(res.data.data.articles);
+            var tmp = [];
+            res.data.data.articles.links.map((link, key) => {
+                if(key != 0 && key != (res.data.data.articles.links.length-1)){
+                    tmp.push(link);
+                }
+            })
+            setPages(tmp);
             setArticles(res.data.data.articles.data);
             setLoading(false);
             setProgress(100);
@@ -79,8 +89,12 @@ function Feed() {
             .catch((error) => {
                 console.error(error)
             })
-    }, []);
+    }
 
+    useEffect(() => {
+        renderPage();
+    }, []);
+    
     function handleFilter(e){
         e.preventDefault();
         setFilter(!filter);
@@ -98,7 +112,11 @@ function Feed() {
         .then((res) => {
             setLoading(true);
             setProgress(70);
-            setPagination(res.data.data.articles);
+            var tmp = [];
+            res.data.data.articles.links.map((link) => {
+                tmp.push(link);
+            })
+            setPages(tmp);
             setArticles(res.data.data.articles.data);
             setLoading(false);
             setProgress(100);
@@ -185,6 +203,17 @@ function Feed() {
                 </Col>
               );
             })}
+          </Row>
+          <Row>
+            <Pagination>
+                {
+                    pages.map((page) => {
+                        return (
+                            <Pagination.Item onClick={() => {renderPage(page.url)}} active={page.active} key={page.label}>{page.label}</Pagination.Item>
+                        )
+                    })
+                }
+            </Pagination>
           </Row>
         </div>
     </div>
