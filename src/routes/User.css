@@ -12,3 +12,13 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+.formUser {
+    border: 1px solid #fff;
+    border-radius: 15px;
+    box-shadow: 0 30px 36px 0 rgba(0, 0, 0, 0.2);
+    padding: 1rem 1rem;
+}
+form label {
+    color: #fff;
+}

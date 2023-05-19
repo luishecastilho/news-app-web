@@ -14,7 +14,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  document.title = "Sign up - News App";
+  document.title = "Sign Up - News App";
 
   useEffect(() => {
     if(GetCookie('auth_token')){
@@ -37,7 +37,7 @@ function Register() {
         window.location.href = "/user";
     })
     .catch(() => {
-      alert("Error on trying to sign. Please try again.")
+      alert("Error on trying to sign up. Please try again.")
     })
   }
 
