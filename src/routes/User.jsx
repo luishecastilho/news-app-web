@@ -65,6 +65,9 @@ function User() {
     My Account
     </h1>
       <div className="container">
+            <a href="/user/preferences"><Button variant="primary">
+                My preferences
+            </Button></a>
         <div className="formUser">
             <h3 style={{color: '#fff'}}>Personal data</h3>
             <hr style={{color: '#fff'}} />

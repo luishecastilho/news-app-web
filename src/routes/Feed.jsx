@@ -5,8 +5,6 @@ import FeedArticle from "../components/FeedArticle";
 import "./Feed.css";
 
 import Spinner from "../components/Spinner/Spinner";
-import "../components/FilterBar.css";
-import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import LoadingBar from "react-top-loading-bar";
@@ -21,6 +19,7 @@ function Feed() {
 
     const [filter, setFilter] = useState(false);
 
+    const [preferences, setPreferences] = useState("");
 
     const [q, setQ] = useState("");
     const [category, setCategory] = useState("");
@@ -90,8 +89,27 @@ function Feed() {
             })
     }
 
+    function renderPreferences() {
+        if(!GetCookie('auth_token')){
+            return;
+        }
+        axios.get("http://127.0.0.1:8000/api/user/preferences-string", {
+            headers: { 
+                'Authorization': `Bearer ${GetCookie('auth_token')}`,
+                'Accept': 'application/json'
+            }
+        })
+        .then((res) => {
+            console.log(res.data.data.data.substring(0, 15))
+        })
+        .catch((error) => {
+            console.error(error)
+        })
+    }
+
     useEffect(() => {
         renderPage();
+        renderPreferences();
     }, []);
     
     function handleFilter(e){
@@ -132,6 +150,11 @@ function Feed() {
         News Feed
         </h1>
         {loading && <Spinner />}
+        {GetCookie('auth_token') ? 
+            <span className="preferencesTxt"><span className="bold">Preferences: </span> {preferences}<a href="/user/preferences">Edit</a></span>
+            :
+            <span className="preferencesTxt">Login to customize your news feed. <a href="/login">Click here.</a></span>
+        }
         <div className="filterDiv">
             <Button variant="primary" onClick={handleFilter}>
                 Filter

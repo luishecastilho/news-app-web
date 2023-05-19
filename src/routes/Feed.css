@@ -16,3 +16,26 @@
     margin-top: 10px;
     margin-bottom: 50px;
 }
+
+.preferencesTxt {
+    font-size: 12px;
+    color: #fff;
+}
+
+.preferencesTxt .bold {
+    font-weight: bold;
+}
+
+.fieldBar {
+    margin: .5rem 1rem;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.fieldBar .selects {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: .5rem 0;
+}
