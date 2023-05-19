@@ -18,7 +18,6 @@ function Feed() {
 
   return (
     <>
-      <Header />
       {/* nav bar de search e filtros */}
       <div id="feed">
         {
