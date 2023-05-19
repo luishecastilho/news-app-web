@@ -32,8 +32,12 @@ function Article() {
 
   return (
     <div id="article">
+        <h1 className="header">
         article
-        <p>{article.title}</p>
+        </h1>
+        <div className="container">
+        <p style={{color: '#ffffff'}}>{article.title}</p>
+        </div>
     </div>
   )
 }

@@ -5,10 +5,14 @@ import './Login.css';
 import SetCookie from '../hooks/SetCookie';
 import GetCookie from '../hooks/GetCookie';
 
+import { Row, Col } from "react-bootstrap";
+
 function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  document.title = "Login - News App";
 
   useEffect(() => {
     if(GetCookie('auth_token')){
@@ -36,12 +40,16 @@ function Login() {
 
   return (
       <div id="login">
-        Login
-        <form action="" onSubmit={submitForm}>
+      <h1 className="header">
+      Login
+      </h1>
+      <div className="container">
+      <form action="" onSubmit={submitForm}>
             <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
             <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
             <button type="submit">submit</button>
         </form>
+      </div>
       </div>
   )
 }

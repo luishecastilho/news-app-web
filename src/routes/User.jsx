@@ -4,27 +4,16 @@ import axios from 'axios';
 import './User.css';
 
 import GetCookie from '../hooks/GetCookie';
-import RemoveCookie from '../hooks/RemoveCookie';
-
-function logout() {
-    axios.post("http://127.0.0.1:8000/api/auth/logout", {}, {
-        headers: { 
-                    'Authorization': `Bearer ${GetCookie('auth_token')}`,
-                    'Accept': 'application/json'
-                }
-    })
-    .then(() => {
-        RemoveCookie('auth_token');
-        window.location.href = "/login";
-    })
-    .catch((error) => {
-      console.error(error)
-    })
-  }
 
 function User() {
 
   const [user, setUser] = useState([]);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  document.title = "User - News App";
 
   useEffect(() => {
     if(!GetCookie('auth_token')){
@@ -38,18 +27,47 @@ function User() {
     })
     .then((res) => {
         setUser(res.data.data.user);
+        setName(res.data.data.user.name);
+        setEmail(res.data.data.user.email);
     })
     .catch((error) => {
       console.error(error)
     })
   }, []);
 
+  function submitForm(e) {
+    e.preventDefault();
+    axios.put("http://127.0.0.1:8000/api/user", {
+        "name": name,
+        "email": email,
+        "password": password ?? ""
+    }, {
+        headers: {
+                    'Authorization': `Bearer ${GetCookie('auth_token')}`,
+                    'Accept': `application/json`
+                }
+    }).then(() => {
+        alert("User successfully updated.");
+        window.location.href = "/user";
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+  }
+
   return (
     <div id="user">
+    <h1 className="header">
     User
-    <p>{user.name}</p>
-    <Link to="/user/edit"><button type='button'>Edit</button></Link>
-    <button type='button' onClick={logout}>Sign Out</button>
+    </h1>
+      <div className="container">
+      <form action="" onSubmit={submitForm}>
+        <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
+        <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+        <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <button type="submit">submit</button>
+        </form>
+      </div>
     </div>
   )
 }

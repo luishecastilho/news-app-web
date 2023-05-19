@@ -1,0 +1,14 @@
+.header {
+    text-align: center;
+    margin-top: 120px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.container {
+    width: 93%;
+    padding-right: (1.5rem, 0.75rem);
+    padding-left: (1.5rem, 0.75rem);
+    margin-right: auto;
+    margin-left: auto;
+}

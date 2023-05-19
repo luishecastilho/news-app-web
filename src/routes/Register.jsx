@@ -37,13 +37,17 @@ function Register() {
 
   return (
     <div id="register">
+        <h1 className="header">
         Register
+      </h1>
+      <div className="container">
         <form action="" onSubmit={submitForm}>
             <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
             <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
             <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
             <button type="submit">submit</button>
         </form>
+      </div>
     </div>
   )
 }

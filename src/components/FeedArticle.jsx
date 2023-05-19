@@ -1,30 +1,36 @@
-import React from 'react';
-import { Link } from "react-router-dom";
-
+import React from "react";
+import { Button, Card } from "react-bootstrap";
 import "./FeedArticle.css";
 
-const FeedArticle = ({article}) =>{
-    return (
-        <div className="article">
-            <Link to={`/article/${article.id}`}><img src={article.banner} /></Link>
-            <div className="body">
-                <div className="header">
-                    <small>{article.category}</small>
-                    <Link to={`/article/${article.id}`}><h3>{article.title}</h3></Link>
-                    <span>{article.description}</span>
-                </div>
-                <div className="footer">
-                    <div className="extra-data">
-                        <Link to={`/article/${article.id}`}><h4>{article.source}</h4></Link>
-                        &nbsp;&nbsp;&nbsp;
-                        <span>{article.author}</span>
-                        &nbsp;&nbsp;&nbsp;
-                        <span>{article.publishedAt}</span>
-                    </div>
-                    <Link to={`/article/${article.id}`}><button type="button">View</button></Link>
-                </div>
-            </div>
-        </div>
-    )
+
+function NewsItem(props) {
+  const { id, title, banner, description, content, source, url, category, author, publishedAt, alt } = props
+  return (
+    <>
+      <Card className="card">
+        <Card.Img className="img" variant="top" src={banner} alt={alt} />
+        <Card.Body>
+          <Card.Title>{title}</Card.Title>
+          <Card.Text className="txt">
+            {description}
+          </Card.Text>
+          <details className="detail">
+            <summary className="sum">Author, Source and Date</summary>
+            <p className="text">
+                {author ? "Unknown" : "Author: "+author}
+            </p>
+            <p className="text">
+                Source: {source}
+            </p>
+            <p className="text">
+                Published at: {publishedAt}
+            </p>
+          </details>
+          <Button href={`/article/${id}`} target="_blank" className="btn">Read more →</Button>
+        </Card.Body>
+      </Card>
+    </>
+  );
 }
-export default FeedArticle
+
+export default NewsItem;
