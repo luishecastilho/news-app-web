@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { Button, Card } from "react-bootstrap";
 import "./FeedArticle.css";
 
@@ -23,7 +24,7 @@ function NewsItem(props) {
                 Source: {source}
             </p>
             <p className="text">
-                Published at: {publishedAt}
+                Published at: {moment(publishedAt).format("MMM Do YY")}
             </p>
           </details>
           <Button href={`/article/${id}`} className="btn">Read more →</Button>

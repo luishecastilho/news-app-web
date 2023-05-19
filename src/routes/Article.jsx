@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import moment from "moment";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import './Article.css';
@@ -38,7 +39,7 @@ function Article() {
             </div>
             <div>
                 <span className="articleSmallTextBold">{article.source}</span>
-                <span className="articleSmallText"> - {article.publishedAt}</span>
+                <span className="articleSmallText"> - {moment(article.publishedAt).format("MMM Do YY")}</span>
             </div>
             <h2 className="articleTitle">{article.title}</h2>
             <div className="bodyContent">
