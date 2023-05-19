@@ -4,20 +4,20 @@ import "./FeedArticle.css";
 
 
 function NewsItem(props) {
-  const { id, title, banner, description, content, source, url, category, author, publishedAt, alt } = props
+  const { id, title, banner, description, source, author, publishedAt, alt } = props
   return (
-    <>
-      <Card className="card">
+      <div className="divCard">
         <Card.Img className="img" variant="top" src={banner} alt={alt} />
         <Card.Body>
           <Card.Title>{title}</Card.Title>
           <Card.Text className="txt">
             {description}
           </Card.Text>
+          <div className="bodyy">
           <details className="detail">
             <summary className="sum">Author, Source and Date</summary>
             <p className="text">
-                {author ? "Unknown" : "Author: "+author}
+                {author != "" || author != null ? "Author: Unknown" : "Author: "+author}
             </p>
             <p className="text">
                 Source: {source}
@@ -27,9 +27,9 @@ function NewsItem(props) {
             </p>
           </details>
           <Button href={`/article/${id}`} target="_blank" className="btn">Read more →</Button>
+          </div>
         </Card.Body>
-      </Card>
-    </>
+      </div>
   );
 }
 

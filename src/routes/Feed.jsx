@@ -75,15 +75,14 @@ function Feed() {
                     id={element.id}
                     title={element.title}
                     banner={
-                      element.banner === null
+                      element.banner === null || 
+                      element.banner === ""
                         ? Nullimage
                         : element.banner
                     }
                     description={element.description}
                     content={element.content}
                     source={element.source}
-                    url={element.url}
-                    category={element.category}
                     author={element.author}
                     publishedAt={element.publishedAt}
                     alt="Article"
