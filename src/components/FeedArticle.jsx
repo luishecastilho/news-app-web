@@ -26,7 +26,7 @@ function NewsItem(props) {
                 Published at: {publishedAt}
             </p>
           </details>
-          <Button href={`/article/${id}`} target="_blank" className="btn">Read more →</Button>
+          <Button href={`/article/${id}`} className="btn">Read more →</Button>
           </div>
         </Card.Body>
       </div>
