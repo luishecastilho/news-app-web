@@ -5,7 +5,9 @@ import './Login.css';
 import SetCookie from '../hooks/SetCookie';
 import GetCookie from '../hooks/GetCookie';
 
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, FormGroup } from "react-bootstrap";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function Login() {
 
@@ -33,8 +35,8 @@ function Login() {
         SetCookie('auth_token', res.data.data.token);
         window.location.href = "/user";
     })
-    .catch((error) => {
-      console.error(error)
+    .catch(() => {
+      alert("The Email or Password field are invalid. Please try again.");
     })
   }
 
@@ -44,11 +46,20 @@ function Login() {
       Login
       </h1>
       <div className="container">
-      <form action="" onSubmit={submitForm}>
-            <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-            <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
-            <button type="submit">submit</button>
-        </form>
+        <Form onSubmit={submitForm}>
+            <Form.Group>
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" name="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" name="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Login
+            </Button>
+            <p className="txt">Don't have an account? <a href="/register">Sign up here.</a></p>
+        </Form>
+
       </div>
       </div>
   )
