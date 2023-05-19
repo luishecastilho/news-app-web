@@ -8,6 +8,7 @@ import Error404 from './Error404.jsx';
 import Feed from './routes/Feed.jsx';
 import Article from './routes/Article.jsx';
 import User from './routes/User.jsx';
+import UserEdit from './routes/UserEdit.jsx';
 import Login from './routes/Login.jsx';
 import Register from './routes/Register.jsx';
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: '/user',
                 element: <User />
+            },
+            {
+                path: '/user/edit',
+                element: <UserEdit />
             },
             {
                 path: '/login',

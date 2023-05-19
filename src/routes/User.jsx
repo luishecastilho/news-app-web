@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import './User.css';
 
@@ -47,6 +48,7 @@ function User() {
     <div id="user">
     User
     <p>{user.name}</p>
+    <Link to="/user/edit"><button type='button'>Edit</button></Link>
     <button type='button' onClick={logout}>Sign Out</button>
     </div>
   )
