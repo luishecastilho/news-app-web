@@ -71,6 +71,7 @@ function Feed() {
             setArticles(res.data.data.articles.data);
             setLoading(false);
             setProgress(100);
+            window.scrollTo(0, 0);
         })
         .catch((error) => {
             console.error(error)
@@ -100,7 +101,7 @@ function Feed() {
             }
         })
         .then((res) => {
-            console.log(res.data.data.data.substring(0, 15))
+            setPreferences(res.data.data.data)
         })
         .catch((error) => {
             console.error(error)
@@ -137,6 +138,7 @@ function Feed() {
             setArticles(res.data.data.articles.data);
             setLoading(false);
             setProgress(100);
+            window.scrollTo(0, 0);
         })
         .catch((error) => {
             console.error(error)
@@ -151,7 +153,7 @@ function Feed() {
         </h1>
         {loading && <Spinner />}
         {GetCookie('auth_token') ? 
-            <span className="preferencesTxt"><span className="bold">Preferences: </span> {preferences}<a href="/user/preferences">Edit</a></span>
+            <span className="preferencesTxt"><span className="bold">Preferences: </span> {preferences}<a href="/user/preferences"> Edit</a></span>
             :
             <span className="preferencesTxt">Login to customize your news feed. <a href="/login">Click here.</a></span>
         }
