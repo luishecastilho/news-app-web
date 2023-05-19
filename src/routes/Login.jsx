@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import {api} from '../api';
 import './Login.css';
 
 import SetCookie from '../hooks/SetCookie';
@@ -24,7 +24,7 @@ function Login() {
 
   function submitForm(e) {
     e.preventDefault();
-    axios.post("http://127.0.0.1:8000/api/auth/login", {
+    api.post("/auth/login", {
         "email": email,
         "password": password
     }, {

@@ -1,14 +1,14 @@
 import React from "react"
 import { Navbar, Nav } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
-import axios from 'axios';
+import {api} from '../api';
 
 import GetCookie from '../hooks/GetCookie';
 import RemoveCookie from '../hooks/RemoveCookie';
 
 function logout(e) {
     e.preventDefault();
-    axios.post("http://127.0.0.1:8000/api/auth/logout", {}, {
+    api.post("/auth/logout", {}, {
         headers: { 
                     'Authorization': `Bearer ${GetCookie('auth_token')}`,
                     'Accept': 'application/json'

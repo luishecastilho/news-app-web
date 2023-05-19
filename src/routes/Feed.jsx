@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import {api} from '../api';
 import GetCookie from '../hooks/GetCookie';
 import FeedArticle from "../components/FeedArticle";
 import "./Feed.css";
@@ -36,15 +36,15 @@ function Feed() {
         var urlFilterData= "";
         var headers = {};
         if(GetCookie('auth_token')) {
-            urlArticles = "http://127.0.0.1:8000/api/auth/feed"
-            urlFilterData = "http://127.0.0.1:8000/api/auth/feed/filter-data"
+            urlArticles = "/auth/feed"
+            urlFilterData = "/auth/feed/filter-data"
             headers = { 
                 'Authorization': `Bearer ${GetCookie('auth_token')}`,
                 'Accept': 'application/json'
             }
         }else{
-            urlArticles = "http://127.0.0.1:8000/api/feed"
-            urlFilterData = "http://127.0.0.1:8000/api/feed/filter-data"
+            urlArticles = "/feed"
+            urlFilterData = "/feed/filter-data"
             headers = {
                 'Accept': 'application/json'
             }
@@ -55,7 +55,7 @@ function Feed() {
         if (url !== null){
             urlArticles = url
         }
-        axios.get(urlArticles, {
+        api.get(urlArticles, {
             headers: headers
         })
         .then((res) => {
@@ -78,7 +78,7 @@ function Feed() {
         })
 
         // get Filters data
-        axios.get(urlFilterData, {
+        api.get(urlFilterData, {
                 headers: headers
             })
             .then((res) => {
@@ -94,7 +94,7 @@ function Feed() {
         if(!GetCookie('auth_token')){
             return;
         }
-        axios.get("http://127.0.0.1:8000/api/user/preferences-string", {
+        api.get("/user/preferences-string", {
             headers: { 
                 'Authorization': `Bearer ${GetCookie('auth_token')}`,
                 'Accept': 'application/json'
@@ -121,7 +121,7 @@ function Feed() {
     function handleSearch(e){
         e.preventDefault();
         setProgress(15);
-        axios.get(`http://127.0.0.1:8000/api/feed?q=${q}&category=${category}&source=${source}&publishedAt=${publishedAt}`, {
+        api.get(`/feed?q=${q}&category=${category}&source=${source}&publishedAt=${publishedAt}`, {
             headers: { 
                         'Authorization': `Bearer ${GetCookie('auth_token')}`,
                         'Accept': 'application/json'

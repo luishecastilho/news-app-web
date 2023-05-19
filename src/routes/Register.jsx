@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import {api} from '../api';
 import './Register.css';
 
 import SetCookie from '../hooks/SetCookie';
@@ -24,7 +24,7 @@ function Register() {
 
   function submitForm(e) {
     e.preventDefault();
-    axios.post("http://127.0.0.1:8000/api/auth/register", {
+    api.post("/auth/register", {
         "name": name,
         "email": email,
         "password": password

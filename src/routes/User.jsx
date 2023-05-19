@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import {api} from '../api';
 import './User.css';
 
 import GetCookie from '../hooks/GetCookie';
@@ -23,7 +23,7 @@ function User() {
     if(!GetCookie('auth_token')){
         window.location.href = "/login";
     }
-    axios.get("http://127.0.0.1:8000/api/user", {
+    api.get("/user", {
         headers: { 
                     'Authorization': `Bearer ${GetCookie('auth_token')}`,
                     'Accept': 'application/json'
@@ -41,7 +41,7 @@ function User() {
 
   function submitForm(e) {
     e.preventDefault();
-    axios.put("http://127.0.0.1:8000/api/user", {
+    api.put("/user", {
         "name": name,
         "email": email,
         "password": password ?? ""

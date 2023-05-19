@@ -2,6 +2,8 @@
 
 First, run the development server:
 
+Change the API url on api.js file
+
 ```bash
 npm install
 npm run dev

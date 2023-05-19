@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import {api} from '../api';
 import GetCookie from '../hooks/GetCookie';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -24,7 +24,7 @@ function UserPreferences() {
         window.location.href = "/login";
     }
 
-    axios.get("http://127.0.0.1:8000/api/feed/filter-data", {
+    api.get("/feed/filter-data", {
         headers: {
             'Accept': 'application/json'
         }
@@ -55,7 +55,7 @@ function UserPreferences() {
 
   function submitForm(e) {
     e.preventDefault();    
-    axios.put("http://127.0.0.1:8000/api/user/preferences", {
+    api.put("/user/preferences", {
         "sources": sources.map(function(val) {
             return val.value;
           }).join(','),

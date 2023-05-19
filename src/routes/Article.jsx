@@ -3,7 +3,7 @@ import moment from "moment";
 import { useParams } from "react-router-dom";
 import nullImage from '../functions/nullImage'
 
-import axios from 'axios';
+import {api} from '../api';
 import './Article.css';
 
 function Article() {
@@ -13,7 +13,7 @@ function Article() {
     const [article, setArticle] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/api/feed/article/${id}`, {
+        api.get(`/feed/article/${id}`, {
             headers: {
                         'Accept': 'application/json'
                     }
