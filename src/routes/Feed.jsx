@@ -3,7 +3,6 @@ import axios from 'axios';
 import './Feed.css';
 
 import FeedArticle from "../components/FeedArticle";
-import Header from "../components/Header";
 
 function Feed() {
 
@@ -17,18 +16,15 @@ function Feed() {
     }, []);
 
   return (
-    <>
-      {/* nav bar de search e filtros */}
-      <div id="feed">
-        {
-            articles.map(function(article) {
-                return (
-                    <FeedArticle article={article} />
-                )
-            })
-        }
-      </div>
-    </>
+    <div id="feed">
+    {
+        articles.map(function(article) {
+            return (
+                <FeedArticle article={article} />
+            )
+        })
+    }
+    </div>
   )
 }
 
