@@ -49,9 +49,9 @@ function Login() {
         <Form onSubmit={submitForm}>
             <Form.Group>
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" name="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
+                <Form.Control type="email" name="email" placeholder="Enter your email" value={email} onChange={e => setEmail(e.target.value)} />
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" name="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+                <Form.Control type="password" name="password" placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} />
 
             </Form.Group>
             <Button variant="primary" type="submit">
@@ -59,7 +59,6 @@ function Login() {
             </Button>
             <p className="txt">Don't have an account? <a href="/register">Sign up here.</a></p>
         </Form>
-
       </div>
       </div>
   )

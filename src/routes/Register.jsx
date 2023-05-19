@@ -5,11 +5,16 @@ import './Register.css';
 import SetCookie from '../hooks/SetCookie';
 import GetCookie from '../hooks/GetCookie';
 
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 function Register() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  document.title = "Sign up - News App";
 
   useEffect(() => {
     if(GetCookie('auth_token')){
@@ -29,24 +34,32 @@ function Register() {
                 }
     }).then((res) => {
         SetCookie("auth_token", res.data.data.token);
+        window.location.href = "/user";
     })
-    .catch((error) => {
-      console.error(error)
+    .catch(() => {
+      alert("Error on trying to sign. Please try again.")
     })
   }
 
   return (
     <div id="register">
         <h1 className="header">
-        Register
+        Sign up form
       </h1>
       <div className="container">
-        <form action="" onSubmit={submitForm}>
-            <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
-            <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
-            <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
-            <button type="submit">submit</button>
-        </form>
+        <Form onSubmit={submitForm}>
+            <Form.Group>
+                <Form.Label>Name</Form.Label>
+                <Form.Control type="name" name="name" placeholder="Enter your name" value={name} onChange={e => setName(e.target.value)} />
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" name="email" placeholder="Enter your email" value={email} onChange={e => setEmail(e.target.value)} />
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" name="password" placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>
       </div>
     </div>
   )
